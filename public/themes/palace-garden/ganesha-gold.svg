@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" fill="none">
+  <!-- Sacred Antique Gold Ganesha Line-art Emblem -->
+  <g stroke="#C5A059" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Mukut / Crown -->
+    <path d="M50 14 L50 24 M44 24 L56 24 M46 19 L54 19 M50 10 L50 14" />
+    <path d="M40 28 C45 23, 55 23, 60 28" />
+    <!-- Ears -->
+    <path d="M37 32 C26 34, 25 50, 36 56 C40 58, 43 54, 43 50" />
+    <path d="M63 32 C74 34, 75 50, 64 56 C60 58, 57 54, 57 50" />
+    <!-- Head & Brow -->
+    <path d="M38 34 C44 31, 56 31, 62 34" />
+    <!-- Tilak / Trishul -->
+    <path d="M47 33 L50 40 L53 33" stroke-width="2" />
+    <circle cx="50" cy="35" r="1.5" fill="#C5A059" />
+    <!-- Trunk (Graceful S-curve curling right) -->
+    <path d="M46 42 C46 54, 42 66, 46 72 C50 78, 62 78, 63 68 C63 62, 57 60, 54 62" />
+    <!-- Tusk -->
+    <path d="M41 53 L36 54" stroke-width="2.5" />
+    <path d="M59 53 L63 54" stroke-width="2" stroke-dasharray="1 2" />
+    <!-- Modak / Laddu in hand -->
+    <circle cx="65" cy="62" r="3" fill="#C5A059" fill-opacity="0.2" />
+  </g>
+</svg>

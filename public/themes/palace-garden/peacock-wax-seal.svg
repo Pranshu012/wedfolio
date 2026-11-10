@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" fill="none">
+  <defs>
+    <radialGradient id="sealGold" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#E8CE84" />
+      <stop offset="50%" stop-color="#C5A059" />
+      <stop offset="100%" stop-color="#8C6A29" />
+    </radialGradient>
+  </defs>
+  <!-- Outer Ornate Wax Rim -->
+  <circle cx="50" cy="50" r="46" fill="url(#sealGold)" stroke="#664C1B" stroke-width="1.5" />
+  <circle cx="50" cy="50" r="41" stroke="#FAF6EE" stroke-opacity="0.6" stroke-width="1" stroke-dasharray="2 2" />
+  <circle cx="50" cy="50" r="37" fill="#541224" stroke="#D4AF37" stroke-width="1.2" />
+
+  <!-- Elegant S & P Monogram with Crown & Lotus -->
+  <g fill="#FAF6EE">
+    <!-- Small Lotus Crown above -->
+    <path d="M50 22 C48 25, 48 27, 50 28 C52 27, 52 25, 50 22" fill="#D4AF37" />
+    <path d="M46 24 C44 26, 45 28, 48 28 C47 26, 46 25, 46 24" fill="#D4AF37" />
+    <path d="M54 24 C56 26, 55 28, 52 28 C53 26, 54 25, 54 24" fill="#D4AF37" />
+    
+    <!-- S & P Text in serif -->
+    <text x="50" y="54" font-family="'Cinzel', Georgia, serif" font-size="16" font-weight="bold" fill="#FDFBF7" text-anchor="middle" letter-spacing="1">S &amp; P</text>
+    
+    <!-- Subtitle / Lotus below -->
+    <circle cx="50" cy="62" r="1.5" fill="#D4AF37" />
+    <path d="M42 63 C46 65, 54 65, 58 63" stroke="#D4AF37" stroke-width="0.8" fill="none" stroke-linecap="round" />
+  </g>
+</svg>
