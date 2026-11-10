@@ -28,22 +28,24 @@ export function CoupleStorySection({ couple }: CoupleStorySectionProps) {
       </div>
 
       {/* Couple Dual Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch">
         {/* The Bride: Shreya */}
-        <div className="flex flex-col items-center text-center p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#FDFBF7] to-[#F7F1E5] border-2 border-[#D4AF37]/60 shadow-xl relative overflow-hidden group hover:border-[#D4AF37] transition-all">
+        <div className="flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-[#FAF4E8] to-[#F5ECE0] border border-[#D4AF37]/50 shadow-[0_10px_30px_rgba(91,14,45,0.08)] relative overflow-hidden group hover:border-[#D4AF37] transition-all">
           <div className="mb-6">
             <RoyalAvatar
               src={couple.bride.avatarUrl}
               alt={couple.bride.fullName}
               fallbackLetter="S"
               roleTitle="The Royal Bride"
+              shape="arch"
+              themeVariant="royal"
             />
           </div>
 
-          <span className="text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-serif font-semibold">
+          <span className="text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-serif font-bold">
             The Royal Bride
           </span>
-          <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#5B0E2D] mt-1">
+          <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#5B0E2D] mt-1.5">
             {couple.bride.fullName}
           </h3>
           <p className="text-sm sm:text-base font-serif italic text-stone-700 mt-3 leading-relaxed max-w-sm">
@@ -53,20 +55,22 @@ export function CoupleStorySection({ couple }: CoupleStorySectionProps) {
         </div>
 
         {/* The Groom: Pranshu */}
-        <div className="flex flex-col items-center text-center p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#FDFBF7] to-[#F7F1E5] border-2 border-[#D4AF37]/60 shadow-xl relative overflow-hidden group hover:border-[#D4AF37] transition-all">
+        <div className="flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-[#FAF4E8] to-[#F5ECE0] border border-[#D4AF37]/50 shadow-[0_10px_30px_rgba(91,14,45,0.08)] relative overflow-hidden group hover:border-[#D4AF37] transition-all">
           <div className="mb-6">
             <RoyalAvatar
               src={couple.groom.avatarUrl}
               alt={couple.groom.fullName}
               fallbackLetter="P"
               roleTitle="The Royal Groom"
+              shape="arch"
+              themeVariant="royal"
             />
           </div>
 
-          <span className="text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-serif font-semibold">
+          <span className="text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-serif font-bold">
             The Royal Groom
           </span>
-          <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#5B0E2D] mt-1">
+          <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#5B0E2D] mt-1.5">
             {couple.groom.fullName}
           </h3>
           <p className="text-sm sm:text-base font-serif italic text-stone-700 mt-3 leading-relaxed max-w-sm">
@@ -78,12 +82,12 @@ export function CoupleStorySection({ couple }: CoupleStorySectionProps) {
 
       {/* Love Story Box */}
       {couple.story && (
-        <div className="mt-12 sm:mt-16 p-6 sm:p-10 md:p-12 rounded-3xl bg-gradient-to-r from-[#5B0E2D] via-[#4A0B24] to-[#5B0E2D] border-2 border-[#D4AF37] shadow-2xl text-center text-[#FDFBF7] max-w-3xl mx-auto relative overflow-hidden">
-          <Heart className="w-6 h-6 text-[#D4AF37] mx-auto mb-3 fill-current" />
-          <h4 className="text-lg sm:text-xl md:text-2xl font-serif font-semibold text-[#F3D794] tracking-wide">
-            Our Love Story
+        <div className="mt-12 sm:mt-16 p-6 sm:p-9 md:p-11 rounded-2xl bg-gradient-to-r from-[#4A0B24] via-[#5B0E2D] to-[#3B071C] border border-[#D4AF37]/70 shadow-[0_14px_36px_rgba(91,14,45,0.18)] text-center text-[#FDFBF7] max-w-3xl mx-auto relative overflow-hidden">
+          <Heart className="w-5 h-5 text-[#D4AF37] mx-auto mb-2.5 fill-current" />
+          <h4 className="text-base sm:text-lg md:text-xl font-serif font-semibold text-[#F3D794] tracking-wider uppercase">
+            Our Royal Journey
           </h4>
-          <p className="text-sm sm:text-base md:text-lg font-serif italic text-[#FDFBF7]/90 mt-3 sm:mt-4 leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg font-serif italic text-[#FDFBF7]/90 mt-3 leading-relaxed">
             &ldquo;{couple.story}&rdquo;
           </p>
         </div>

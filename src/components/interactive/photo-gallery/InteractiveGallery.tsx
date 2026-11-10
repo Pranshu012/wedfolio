@@ -9,14 +9,17 @@ interface InteractiveGalleryProps {
   items: PublicGalleryItem[];
   title?: string;
   subtitle?: string;
+  themeVariant?: 'royal' | 'palace';
 }
 
 export function InteractiveGallery({
   items,
   title = 'Moments of Love & Royalty',
   subtitle = 'A glimpse into our cherished memories and auspicious milestones',
+  themeVariant = 'royal',
 }: InteractiveGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const isPalace = themeVariant === 'palace';
 
   const handleNext = useCallback(() => {
     if (selectedIndex === null) return;
@@ -50,16 +53,34 @@ export function InteractiveGallery({
     <section className="py-14 sm:py-20 px-4 md:px-8 max-w-7xl mx-auto">
       {/* Section Header */}
       <div className="text-center mb-10 sm:mb-14">
-        <span className="text-[#D4AF37] text-xs font-serif uppercase tracking-[0.3em]">
+        <span
+          className={`text-xs font-serif uppercase tracking-[0.3em] font-semibold ${
+            isPalace ? 'text-[#C5A059]' : 'text-[#D4AF37]'
+          }`}
+        >
           Treasured Gallery
         </span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#5B0E2D] font-medium mt-2">
+        <h2
+          className={`text-3xl sm:text-4xl md:text-5xl font-serif font-medium mt-2 ${
+            isPalace ? 'text-[#4A0E17]' : 'text-[#5B0E2D]'
+          }`}
+        >
           {title}
         </h2>
         <div className="flex items-center justify-center gap-3 my-3">
-          <div className="h-px w-16 bg-[#D4AF37]/50" />
-          <span className="text-[#D4AF37] text-sm">✦</span>
-          <div className="h-px w-16 bg-[#D4AF37]/50" />
+          <div
+            className={`h-px w-16 ${
+              isPalace ? 'bg-[#C5A059]/40' : 'bg-[#D4AF37]/50'
+            }`}
+          />
+          <span className={`text-sm ${isPalace ? 'text-[#C5A059]' : 'text-[#D4AF37]'}`}>
+            ✦
+          </span>
+          <div
+            className={`h-px w-16 ${
+              isPalace ? 'bg-[#C5A059]/40' : 'bg-[#D4AF37]/50'
+            }`}
+          />
         </div>
         <p className="text-sm md:text-base font-serif italic text-stone-600 max-w-lg mx-auto">
           {subtitle}
@@ -75,6 +96,7 @@ export function InteractiveGallery({
             alt={item.caption || `Royal Wedding Photo ${idx + 1}`}
             caption={item.caption}
             index={idx}
+            themeVariant={themeVariant}
             onClick={() => setSelectedIndex(idx)}
           />
         ))}

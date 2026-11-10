@@ -22,6 +22,7 @@ export function PalaceCountdownSection({
           eventStartTime={eventStartTime}
           timezone={timezone}
           title="Countdown To The Sacred Union"
+          variant="palace"
         />
       </div>
     </section>

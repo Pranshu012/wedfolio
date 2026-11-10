@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
+import { assetUrl } from '@/lib/utils';
 
 export function CornerBotanicals() {
   const shouldReduceMotion = useReducedMotion();
@@ -16,7 +17,7 @@ export function CornerBotanicals() {
         className="absolute top-0 left-0 w-28 sm:w-44 md:w-60 lg:w-72 aspect-square"
       >
         <img
-          src="/themes/palace-garden/rose-corner-left.png"
+          src={assetUrl('/themes/palace-garden/rose-corner-left.png')}
           alt=""
           aria-hidden="true"
           className="w-full h-full object-contain object-top-left"
@@ -35,7 +36,7 @@ export function CornerBotanicals() {
         className="absolute top-0 right-0 w-28 sm:w-44 md:w-60 lg:w-72 aspect-square"
       >
         <img
-          src="/themes/palace-garden/rose-corner-right.png"
+          src={assetUrl('/themes/palace-garden/rose-corner-right.png')}
           alt=""
           aria-hidden="true"
           className="w-full h-full object-contain object-top-right"

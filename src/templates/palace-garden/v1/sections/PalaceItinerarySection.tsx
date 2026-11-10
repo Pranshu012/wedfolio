@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useReducedMotion, type Variants } from
 import { Calendar, Clock, MapPin, Sparkles } from 'lucide-react';
 import type { PublicEventScheduleItem } from '@/modules/publishing/domain/public-snapshot.schema';
 import { SectionDivider } from '../components/SectionDivider';
+import { MOTION_EASINGS, MOTION_DURATIONS } from '@/lib/design-system/motion';
 
 interface PalaceItinerarySectionProps {
   schedule: PublicEventScheduleItem[];
@@ -30,31 +31,31 @@ export function PalaceItinerarySection({ schedule }: PalaceItinerarySectionProps
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+      transition: { duration: MOTION_DURATIONS.headingReveal, ease: MOTION_EASINGS.ceremonial },
     },
   };
 
   const cardVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: shouldReduceMotion ? 0 : 35,
-      scale: shouldReduceMotion ? 1 : 0.97,
+      y: shouldReduceMotion ? 0 : 30,
+      scale: shouldReduceMotion ? 1 : 0.98,
     },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1] as const,
-        staggerChildren: 0.07,
-        delayChildren: 0.12,
+        duration: MOTION_DURATIONS.cardReveal,
+        ease: MOTION_EASINGS.ceremonial,
+        staggerChildren: 0.06,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 12 },
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 10 },
     visible: {
       opacity: 1,
       y: 0,
@@ -67,7 +68,7 @@ export function PalaceItinerarySection({ schedule }: PalaceItinerarySectionProps
     visible: {
       scale: 1,
       opacity: 1,
-      transition: { duration: 0.5, ease: [0.34, 1.56, 0.64, 1] as const },
+      transition: { duration: MOTION_DURATIONS.marker, ease: MOTION_EASINGS.spring },
     },
   };
 
@@ -117,10 +118,10 @@ export function PalaceItinerarySection({ schedule }: PalaceItinerarySectionProps
               whileInView="visible"
               viewport={{ once: true, amount: 0.4 }}
               variants={markerVariants}
-              className="absolute -left-[36px] sm:-left-[44px] md:-left-[57px] top-4 w-6 h-6 rounded-full bg-[#FAF6EE] border-2 border-[#C5A059] flex items-center justify-center shadow-[0_0_8px_rgba(197,160,89,0.35)] text-[#4A0E17] text-[10px] z-10"
+              className="absolute -left-[36px] sm:-left-[44px] md:-left-[57px] top-4 w-6 h-6 rounded-full bg-[#FAF6EE] border-2 border-[#C5A059] flex items-center justify-center shadow-[0_0_8px_rgba(197,160,89,0.35)] text-[#D98894] text-[11px] z-10"
               aria-hidden="true"
             >
-              ✦
+              🌸
             </motion.div>
 
             {/* C. Event Card Reveal */}
@@ -134,13 +135,17 @@ export function PalaceItinerarySection({ schedule }: PalaceItinerarySectionProps
                   ? {}
                   : {
                       y: -4,
-                      borderColor: 'rgba(197, 160, 89, 1)',
-                      boxShadow: '0 20px 35px -10px rgba(74, 14, 23, 0.12)',
-                      transition: { duration: 0.3, ease: 'easeOut' as const },
+                      borderColor: 'rgba(197, 160, 89, 0.9)',
+                      boxShadow: '0 18px 36px -10px rgba(74, 14, 23, 0.14)',
+                      transition: { duration: 0.25, ease: 'easeOut' as const },
                     }
               }
-              className="p-5 sm:p-7 md:p-8 rounded-3xl bg-gradient-to-br from-[#FAF6EE] to-[#F5ECE0] border-2 border-[#C5A059]/60 shadow-md transition-colors"
+              className="relative p-5 sm:p-7 md:p-8 rounded-2xl bg-gradient-to-br from-[#FAF6EE] to-[#F5ECE0] border border-[#C5A059]/45 shadow-[0_8px_24px_rgba(74,14,23,0.06)] transition-all"
             >
+              {/* Corner delicate botanical floral accents */}
+              <div className="absolute top-0 right-0 w-7 h-7 pointer-events-none opacity-20 border-t-2 border-r-2 border-[#C5A059] rounded-tr-2xl" />
+              <div className="absolute bottom-0 left-0 w-7 h-7 pointer-events-none opacity-20 border-b-2 border-l-2 border-[#C5A059] rounded-bl-2xl" />
+
               {/* Staggered Content Sequence */}
               {/* 1 & 2. Date and Time Badges */}
               <motion.div

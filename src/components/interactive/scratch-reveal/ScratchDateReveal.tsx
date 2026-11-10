@@ -23,19 +23,25 @@ export function ScratchDateReveal({
   const [isScratching, setIsScratching] = useState(false);
   const [hasScratched, setHasScratched] = useState(false);
 
-  const triggerConfetti = useCallback(() => {
+  const triggerGoldSparkles = useCallback(() => {
+    // Subtle localized antique gold sparkle burst around the card (replaces excessive screen-wide confetti)
     confetti({
-      particleCount: 70,
-      spread: 75,
-      origin: { y: 0.65 },
-      colors: ['#D4AF37', '#5B0E2D', '#0B3C2D', '#F3D794'],
+      particleCount: 28,
+      spread: 50,
+      startVelocity: 18,
+      ticks: 70,
+      gravity: 0.9,
+      origin: { y: 0.62 },
+      colors: ['#D4AF37', '#F3D794', '#E8CE84'],
+      shapes: ['circle'],
+      scalar: 0.85,
     });
   }, []);
 
   const handleRevealAll = useCallback(() => {
     if (isRevealed) return;
     setIsRevealed(true);
-    triggerConfetti();
+    triggerGoldSparkles();
     onRevealed?.();
 
     const canvas = canvasRef.current;
@@ -45,7 +51,7 @@ export function ScratchDateReveal({
         ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
     }
-  }, [isRevealed, onRevealed, triggerConfetti]);
+  }, [isRevealed, onRevealed, triggerGoldSparkles]);
 
   // Paint the metallic gold scratch layer on canvas
   const initCanvas = useCallback(() => {
@@ -86,21 +92,25 @@ export function ScratchDateReveal({
       ctx.stroke();
     }
 
-    // Outer border on canvas
-    ctx.strokeStyle = 'rgba(91, 14, 45, 0.4)';
-    ctx.lineWidth = 3;
-    ctx.strokeRect(3, 3, width - 6, height - 6);
+    // Refined embossed borders on gold foil
+    ctx.strokeStyle = 'rgba(91, 14, 45, 0.45)';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(4, 4, width - 8, height - 8);
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.lineWidth = 0.8;
+    ctx.strokeRect(7, 7, width - 14, height - 14);
 
     // Calligraphic instruction text
     ctx.fillStyle = '#420A20';
-    ctx.font = 'bold 13px Cinzel, Georgia, serif';
+    ctx.font = 'bold 12px Cinzel, Georgia, serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('✦ SCRATCH TO REVEAL ✦', width / 2, height / 2 - 8);
+    ctx.fillText('✦ SCRATCH TO REVEAL ✦', width / 2, height / 2 - 7);
 
     ctx.fillStyle = '#5B0E2D';
     ctx.font = 'italic 10px Cormorant Garamond, serif';
-    ctx.fillText('(Drag pointer or swipe across)', width / 2, height / 2 + 12);
+    ctx.fillText('Swipe pointer across or tap below', width / 2, height / 2 + 11);
   }, []);
 
   useEffect(() => {
@@ -192,17 +202,17 @@ export function ScratchDateReveal({
       {/* Card Container */}
       <div
         ref={containerRef}
-        className="relative w-full aspect-[2.8/1] min-h-[110px] rounded-2xl overflow-hidden shadow-2xl border-2 border-[#D4AF37] bg-gradient-to-br from-[#420A20] via-[#5B0E2D] to-[#2B0514] flex items-center justify-center select-none"
+        className="relative w-full aspect-[2.85/1] min-h-[110px] rounded-xl overflow-hidden shadow-[0_10px_25px_rgba(91,14,45,0.2)] border border-[#D4AF37]/75 bg-gradient-to-br from-[#38061B] via-[#4A0B24] to-[#240310] flex items-center justify-center select-none"
       >
         {/* Hidden Content Revealed Beneath Scratch Layer */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center z-0">
-          <span className="text-[11px] font-serif uppercase tracking-[0.25em] text-[#F3D794] font-semibold">
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-4 py-3 text-center z-0">
+          <span className="text-[10px] sm:text-xs font-serif uppercase tracking-[0.25em] text-[#D4AF37] font-semibold">
             Wedding Muhurat
           </span>
-          <span className="text-lg sm:text-xl font-serif font-bold text-[#FDFBF7] tracking-wider mt-1 drop-shadow-sm">
+          <span className="text-base sm:text-lg md:text-xl font-serif font-bold text-[#FDFBF7] tracking-wider my-0.5 leading-snug drop-shadow-xs">
             {revealText}
           </span>
-          <span className="text-[11px] font-serif italic text-[#E0C097] mt-0.5">
+          <span className="text-[11px] font-serif italic text-[#F3D794]">
             {muhuratTime}
           </span>
         </div>

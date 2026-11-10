@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
+import { assetUrl } from '@/lib/utils';
 
 export function PalaceHeroIllustration() {
   const shouldReduceMotion = useReducedMotion();
@@ -18,7 +19,7 @@ export function PalaceHeroIllustration() {
         className="w-full max-w-4xl mx-auto flex justify-center"
       >
         <img
-          src="/themes/palace-garden/palace-hero-garden.png"
+          src={assetUrl('/themes/palace-garden/palace-hero-garden.png')}
           alt="Palace Garden Pavilions with Peacocks, Garden Palms, and Royal Couple"
           className="w-full h-[250px] sm:h-[340px] md:h-[420px] lg:h-[480px] object-cover object-bottom"
           style={{

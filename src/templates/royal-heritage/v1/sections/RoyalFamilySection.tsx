@@ -2,7 +2,9 @@
 
 import React, { useState } from 'react';
 import { HeartHandshake } from 'lucide-react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import type { PublicFamilyMember } from '@/modules/publishing/domain/public-snapshot.schema';
+import { MOTION_EASINGS, getHeadingVariants } from '@/lib/design-system/motion';
 
 interface RoyalFamilySectionProps {
   family: PublicFamilyMember[];
@@ -10,6 +12,7 @@ interface RoyalFamilySectionProps {
 
 export function RoyalFamilySection({ family }: RoyalFamilySectionProps) {
   const [activeSide, setActiveSide] = useState<'all' | 'bride' | 'groom'>('all');
+  const shouldReduceMotion = useReducedMotion();
 
   const filteredMembers =
     activeSide === 'all'
@@ -22,7 +25,13 @@ export function RoyalFamilySection({ family }: RoyalFamilySectionProps) {
   return (
     <section className="py-20 px-4 md:px-8 max-w-6xl mx-auto bg-[#FDFBF7]">
       {/* Section Header */}
-      <div className="text-center mb-12">
+      <motion.div
+        className="text-center mb-12"
+        variants={getHeadingVariants(!!shouldReduceMotion)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <span className="text-[#D4AF37] text-xs font-serif uppercase tracking-[0.3em]">
           With Sacred Blessings
         </span>
@@ -37,7 +46,7 @@ export function RoyalFamilySection({ family }: RoyalFamilySectionProps) {
         <p className="text-sm md:text-base font-serif italic text-stone-600 max-w-lg mx-auto">
           The pillar of our values, heritage, and eternal support
         </p>
-      </div>
+      </motion.div>
 
       {/* Side Filter Tabs */}
       <div className="flex items-center justify-center gap-2 mb-12">
@@ -73,37 +82,55 @@ export function RoyalFamilySection({ family }: RoyalFamilySectionProps) {
         </button>
       </div>
 
-      {/* Family Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {filteredMembers.map((member, idx) => (
-          <div
-            key={idx}
-            className="p-6 rounded-2xl bg-gradient-to-br from-[#FDFBF7] to-[#F5ECE0] border border-[#D4AF37]/60 shadow-md hover:shadow-xl transition-all relative overflow-hidden flex flex-col justify-between"
-          >
-            {/* Side Badge */}
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-[10px] uppercase tracking-[0.2em] font-serif font-bold text-[#D4AF37] bg-[#5B0E2D] px-2.5 py-1 rounded-full">
-                {member.side === 'bride' ? "Bride's Side" : "Groom's Side"}
-              </span>
-              <HeartHandshake className="w-5 h-5 text-[#D4AF37]" />
-            </div>
+      {/* Family Cards Grid with AnimatePresence */}
+      <motion.div
+        layout
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+      >
+        <AnimatePresence mode="popLayout">
+          {filteredMembers.map((member, idx) => (
+            <motion.div
+              layout
+              key={member.name + member.relation + idx}
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 10 }}
+              transition={{
+                duration: shouldReduceMotion ? 0.01 : 0.45,
+                ease: MOTION_EASINGS.ceremonial,
+              }}
+              whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.2 } }}
+              className="p-6 rounded-2xl bg-gradient-to-br from-[#FDFBF7] to-[#F5ECE0] border border-[#D4AF37]/50 shadow-[0_8px_24px_rgba(91,14,45,0.06)] hover:shadow-[0_16px_36px_rgba(91,14,45,0.12)] transition-shadow relative overflow-hidden flex flex-col justify-between"
+            >
+              {/* Corner ornamental accents */}
+              <div className="absolute top-0 right-0 w-8 h-8 pointer-events-none opacity-20 border-t-2 border-r-2 border-[#D4AF37] rounded-tr-2xl" />
+              <div className="absolute bottom-0 left-0 w-8 h-8 pointer-events-none opacity-20 border-b-2 border-l-2 border-[#D4AF37] rounded-bl-2xl" />
 
-            <div>
-              <h4 className="text-xl font-serif font-bold text-[#5B0E2D]">
-                {member.name}
-              </h4>
-              <p className="text-xs uppercase tracking-wider font-serif text-[#0B3C2D] font-semibold mt-0.5">
-                {member.relation}
-              </p>
-              {member.blessingMessage && (
-                <p className="text-sm font-serif italic text-stone-700 mt-3 leading-relaxed border-l-2 border-[#D4AF37]/70 pl-3">
-                  &ldquo;{member.blessingMessage}&rdquo;
+              {/* Side Badge */}
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-[10px] uppercase tracking-[0.2em] font-serif font-bold text-[#D4AF37] bg-[#5B0E2D] px-2.5 py-1 rounded-full shadow-sm border border-[#D4AF37]/30">
+                  {member.side === 'bride' ? "Bride's Side" : "Groom's Side"}
+                </span>
+                <HeartHandshake className="w-5 h-5 text-[#D4AF37]" />
+              </div>
+
+              <div>
+                <h4 className="text-xl font-serif font-bold text-[#5B0E2D]">
+                  {member.name}
+                </h4>
+                <p className="text-xs uppercase tracking-wider font-serif text-[#0B3C2D] font-semibold mt-0.5">
+                  {member.relation}
                 </p>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+                {member.blessingMessage && (
+                  <p className="text-sm font-serif italic text-stone-700 mt-3 leading-relaxed border-l-2 border-[#D4AF37]/70 pl-3">
+                    &ldquo;{member.blessingMessage}&rdquo;
+                  </p>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
     </section>
   );
 }

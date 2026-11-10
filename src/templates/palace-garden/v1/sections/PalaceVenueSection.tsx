@@ -1,9 +1,11 @@
 'use client';
 
 import React from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { MapPin, Navigation, ExternalLink } from 'lucide-react';
 import type { PublicVenue } from '@/modules/publishing/domain/public-snapshot.schema';
 import { SectionDivider } from '../components/SectionDivider';
+import { getHeadingVariants, MOTION_EASINGS } from '@/lib/design-system/motion';
 
 interface PalaceVenueSectionProps {
   venue?: PublicVenue;
@@ -11,12 +13,19 @@ interface PalaceVenueSectionProps {
 }
 
 export function PalaceVenueSection({ venue, isEnabled = true }: PalaceVenueSectionProps) {
+  const shouldReduceMotion = useReducedMotion();
   if (!isEnabled || !venue) return null;
 
   return (
     <section className="py-16 sm:py-20 px-4 md:px-8 max-w-5xl mx-auto">
       {/* Section Header */}
-      <div className="text-center mb-12">
+      <motion.div
+        className="text-center mb-12"
+        variants={getHeadingVariants(!!shouldReduceMotion)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <span className="text-[#C5A059] text-xs font-serif uppercase tracking-[0.3em] font-semibold">
           Destination &amp; Directions
         </span>
@@ -27,10 +36,16 @@ export function PalaceVenueSection({ venue, isEnabled = true }: PalaceVenueSecti
         <p className="text-sm md:text-base font-serif italic text-stone-600 max-w-md mx-auto">
           Where our grand celebrations and joyous memories unfold
         </p>
-      </div>
+      </motion.div>
 
       {/* Venue Card with Embedded Map */}
-      <div className="rounded-3xl bg-gradient-to-br from-[#FAF6EE] to-[#F5ECE0] border-2 border-[#C5A059]/60 shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-5">
+      <motion.div
+        initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.65, ease: MOTION_EASINGS.ceremonial }}
+        className="rounded-2xl bg-gradient-to-br from-[#FAF6EE] to-[#F5ECE0] border border-[#C5A059]/45 shadow-[0_12px_36px_rgba(74,14,23,0.08)] overflow-hidden grid grid-cols-1 lg:grid-cols-5 relative"
+      >
         {/* Venue Information Column */}
         <div className="p-7 sm:p-10 lg:col-span-2 flex flex-col justify-between">
           <div>
@@ -81,7 +96,7 @@ export function PalaceVenueSection({ venue, isEnabled = true }: PalaceVenueSecti
             allowFullScreen
           />
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

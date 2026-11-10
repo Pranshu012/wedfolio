@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
+import { MOTION_EASINGS } from '@/lib/design-system/motion';
 
 interface PalaceOpeningEnvelopeProps {
   sealText?: string;
@@ -39,10 +40,10 @@ export function PalaceOpeningEnvelope({
   const handleSealClick = useCallback(() => {
     if (envelopeState !== 'closed') return;
 
-    // State 2: Seal breaks
+    // State 2: Seal cracks with subtle gold flash
     setEnvelopeState('breaking');
 
-    // State 3: Envelope flap opens and letter rises
+    // State 3: Envelope flap opens upwards
     const timer1 = setTimeout(() => {
       setEnvelopeState('opening');
     }, 450);
@@ -56,7 +57,7 @@ export function PalaceOpeningEnvelope({
     const timer3 = setTimeout(() => {
       setEnvelopeState('dismissed');
       onOpenComplete?.();
-    }, 3400);
+    }, 3600);
 
     return () => {
       clearTimeout(timer1);
@@ -83,9 +84,9 @@ export function PalaceOpeningEnvelope({
         <motion.div
           key="palace-envelope-modal"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.03 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#2B0E17]/92 px-4 backdrop-blur-md overflow-hidden select-none"
+          exit={{ opacity: 0, scale: 1.02 }}
+          transition={{ duration: 0.85, ease: MOTION_EASINGS.ceremonial }}
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#2B0E17]/94 px-4 backdrop-blur-md overflow-hidden select-none"
           role="dialog"
           aria-modal="true"
           aria-label="Palace Garden Wedding Invitation Opening Seal"
@@ -96,9 +97,9 @@ export function PalaceOpeningEnvelope({
           </div>
 
           {/* Invitation Envelope Shell */}
-          <div className="relative w-full max-w-[340px] sm:max-w-[440px] aspect-[1.38/1] perspective-[1200px]">
+          <div className="relative w-full max-w-[340px] sm:max-w-[460px] aspect-[1.38/1] perspective-[1400px]">
             {/* 1. Envelope Back Panel (Warm Ivory Parchment) */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#FAF6EE] via-[#F5ECE0] to-[#EFE2D0] border-2 border-[#C5A059] shadow-2xl overflow-visible">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#FAF6EE] via-[#F5ECE0] to-[#EFE2D0] border-2 border-[#C5A059] shadow-[0_24px_50px_rgba(0,0,0,0.5)] overflow-visible">
               {/* Corner Filigrees in Antique Gold */}
               <div className="absolute top-2 left-2 w-5 h-5 border-t-2 border-l-2 border-[#C5A059]" />
               <div className="absolute top-2 right-2 w-5 h-5 border-t-2 border-r-2 border-[#C5A059]" />
@@ -111,24 +112,24 @@ export function PalaceOpeningEnvelope({
               initial={{ y: 0, scale: 0.94 }}
               animate={
                 isLetterRevealed
-                  ? { y: -70, scale: 1.05 }
+                  ? { y: -75, scale: 1.04 }
                   : isFlapOpen
                   ? { y: -35, scale: 0.98 }
                   : { y: 0, scale: 0.94 }
               }
               transition={{
-                duration: 1.1,
-                ease: [0.22, 1, 0.36, 1],
+                duration: 1.15,
+                ease: MOTION_EASINGS.ceremonial,
               }}
-              className="absolute inset-x-3 sm:inset-x-5 top-3 sm:top-4 bottom-3 sm:bottom-4 rounded-xl bg-gradient-to-b from-[#FAF6EE] via-[#FAF4E8] to-[#F5ECE0] border border-[#C5A059] p-4 sm:p-6 flex flex-col items-center justify-center text-center shadow-2xl z-10 overflow-hidden"
+              className="absolute inset-x-3 sm:inset-x-5 top-3 sm:top-4 bottom-3 sm:bottom-4 rounded-xl bg-gradient-to-b from-[#FAF6EE] via-[#FAF4E8] to-[#F5ECE0] border border-[#C5A059] p-4 sm:p-6 flex flex-col items-center justify-center text-center shadow-[0_16px_36px_rgba(0,0,0,0.25)] z-10 overflow-hidden"
             >
               {/* Ornate Inner Border Line */}
               <div className="absolute inset-2 border border-[#C5A059]/40 rounded-lg pointer-events-none" />
 
               {/* Step 1: Traditional Mantra */}
               <motion.span
-                initial={{ opacity: 0, y: 8 }}
-                animate={isLetterRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 6 }}
+                animate={isLetterRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-[9px] sm:text-[11px] font-serif uppercase tracking-[0.3em] text-[#C5A059] font-bold"
               >
@@ -137,8 +138,8 @@ export function PalaceOpeningEnvelope({
 
               {/* Step 2: Wedding Title */}
               <motion.h3
-                initial={{ opacity: 0, y: 10 }}
-                animate={isLetterRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
+                animate={isLetterRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
                 transition={{ duration: 0.5, delay: 0.25 }}
                 className="text-xs sm:text-sm font-serif uppercase tracking-[0.2em] text-[#6B7C69] font-semibold mt-1"
               >
@@ -147,8 +148,8 @@ export function PalaceOpeningEnvelope({
 
               {/* Step 3: Grand Couple Names */}
               <motion.h2
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={isLetterRevealed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={isLetterRevealed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-[#4A0E17] tracking-wide my-1 drop-shadow-xs"
               >
@@ -199,8 +200,8 @@ export function PalaceOpeningEnvelope({
                   : { rotateX: 0, zIndex: 30 }
               }
               transition={{
-                duration: 0.7,
-                ease: [0.4, 0, 0.2, 1],
+                duration: 0.85,
+                ease: MOTION_EASINGS.ceremonial,
               }}
               style={{
                 transformOrigin: 'top center',
@@ -234,33 +235,70 @@ export function PalaceOpeningEnvelope({
                   onKeyDown={handleKeyDown}
                   className="group cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#C5A059]/50 rounded-full select-none touch-manipulation"
                 >
-                  <motion.div
-                    animate={
-                      isSealBreaking
-                        ? {
-                            scale: [1, 1.15, 0.9, 0],
-                            opacity: [1, 0.9, 0.6, 0],
-                            rotate: [0, -8, 8, -4],
-                          }
-                        : { scale: 1, opacity: 1, rotate: 0 }
-                    }
-                    transition={{ duration: 0.45, ease: 'easeOut' }}
-                    className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#E8CE84] via-[#C5A059] to-[#8C6A29] p-[2.5px] shadow-2xl flex items-center justify-center transition-transform group-hover:scale-105 active:scale-95"
-                  >
-                    <div className="w-full h-full rounded-full bg-[#4A0E17] border-2 border-[#E8CE84] flex flex-col items-center justify-center text-center shadow-inner relative overflow-hidden">
-                      {/* Golden Fracture Flash line when cracking */}
-                      {isSealBreaking && (
-                        <div className="absolute inset-0 bg-[#FAF6EE] opacity-75 animate-ping" />
-                      )}
+                  {/* Subtle gold glow pulse */}
+                  {envelopeState === 'closed' && (
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.25, 1],
+                        opacity: [0.5, 0.15, 0.5],
+                      }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: 2.2,
+                        ease: 'easeInOut',
+                      }}
+                      className="absolute inset-0 rounded-full bg-[#C5A059]/40 blur-md pointer-events-none"
+                    />
+                  )}
 
-                      <span className="text-[#FAF6EE] text-xs sm:text-sm font-serif font-bold tracking-widest drop-shadow-xs">
-                        {sealText}
-                      </span>
-                      <span className="text-[8px] sm:text-[9px] text-[#C5A059] font-serif uppercase tracking-widest mt-0.5">
-                        {isSealBreaking ? 'Opening' : 'Tap To Open'}
-                      </span>
-                    </div>
-                  </motion.div>
+                  {/* Dual-Half Cracking Wax Seal Container */}
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center transition-transform group-hover:scale-105 active:scale-95">
+                    {/* Left Half */}
+                    <motion.div
+                      animate={
+                        isSealBreaking
+                          ? { x: -28, rotate: -16, opacity: 0, scale: 0.85 }
+                          : { x: 0, rotate: 0, opacity: 1, scale: 1 }
+                      }
+                      transition={{ duration: 0.45, ease: 'easeOut' }}
+                      className="absolute inset-y-0 left-0 w-1/2 overflow-hidden rounded-l-full bg-gradient-to-br from-[#E8CE84] via-[#C5A059] to-[#8C6A29] p-[2.5px] shadow-2xl"
+                    >
+                      <div className="w-[200%] h-full rounded-full bg-[#4A0E17] border-2 border-[#E8CE84] flex flex-col items-center justify-center text-center shadow-inner relative">
+                        {isSealBreaking && (
+                          <div className="absolute inset-0 bg-[#FAF6EE] opacity-80 animate-ping" />
+                        )}
+                        <span className="text-[#FAF6EE] text-xs sm:text-sm font-serif font-bold tracking-widest drop-shadow-xs">
+                          {sealText}
+                        </span>
+                        <span className="text-[7px] sm:text-[8px] text-[#C5A059] font-serif uppercase tracking-widest mt-0.5">
+                          {isSealBreaking ? 'Opening' : 'Tap To Open'}
+                        </span>
+                      </div>
+                    </motion.div>
+
+                    {/* Right Half */}
+                    <motion.div
+                      animate={
+                        isSealBreaking
+                          ? { x: 28, rotate: 16, opacity: 0, scale: 0.85 }
+                          : { x: 0, rotate: 0, opacity: 1, scale: 1 }
+                      }
+                      transition={{ duration: 0.45, ease: 'easeOut' }}
+                      className="absolute inset-y-0 right-0 w-1/2 overflow-hidden rounded-r-full bg-gradient-to-br from-[#E8CE84] via-[#C5A059] to-[#8C6A29] p-[2.5px] shadow-2xl"
+                    >
+                      <div className="w-[200%] -ml-[100%] h-full rounded-full bg-[#4A0E17] border-2 border-[#E8CE84] flex flex-col items-center justify-center text-center shadow-inner relative">
+                        {isSealBreaking && (
+                          <div className="absolute inset-0 bg-[#FAF6EE] opacity-80 animate-ping" />
+                        )}
+                        <span className="text-[#FAF6EE] text-xs sm:text-sm font-serif font-bold tracking-widest drop-shadow-xs">
+                          {sealText}
+                        </span>
+                        <span className="text-[7px] sm:text-[8px] text-[#C5A059] font-serif uppercase tracking-widest mt-0.5">
+                          {isSealBreaking ? 'Opening' : 'Tap To Open'}
+                        </span>
+                      </div>
+                    </motion.div>
+                  </div>
                 </div>
               )}
             </div>
