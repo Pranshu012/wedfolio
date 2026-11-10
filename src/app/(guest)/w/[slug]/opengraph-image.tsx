@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { getPublishedWeddingBySlug } from '@/modules/publishing/services/public-wedding.service';
 
+export const dynamic = 'force-static';
 export const runtime = 'nodejs';
 export const alt = 'The Royal Wedding Celebration';
 export const size = {
@@ -8,6 +9,10 @@ export const size = {
   height: 630,
 };
 export const contentType = 'image/png';
+
+export async function generateStaticParams() {
+  return [{ slug: 'shreya-pranshu' }];
+}
 
 interface Props {
   params: Promise<{
@@ -61,6 +66,7 @@ export default async function Image({ params }: Props) {
           {/* Top Traditional Mantra */}
           <div
             style={{
+              display: 'flex',
               fontSize: '18px',
               letterSpacing: '6px',
               color: '#F3D794',
@@ -74,6 +80,7 @@ export default async function Image({ params }: Props) {
           {/* Subtitle */}
           <div
             style={{
+              display: 'flex',
               fontSize: '22px',
               letterSpacing: '4px',
               color: '#D4AF37',
@@ -87,6 +94,7 @@ export default async function Image({ params }: Props) {
           {/* Couple Names */}
           <div
             style={{
+              display: 'flex',
               fontSize: '64px',
               fontWeight: 'bold',
               color: '#FDFBF7',
@@ -101,6 +109,7 @@ export default async function Image({ params }: Props) {
           {/* Gold Divider Line */}
           <div
             style={{
+              display: 'flex',
               width: '180px',
               height: '2px',
               background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)',
@@ -111,17 +120,19 @@ export default async function Image({ params }: Props) {
           {/* Date & Destination */}
           <div
             style={{
+              display: 'flex',
               fontSize: '24px',
               color: '#F3D794',
               fontStyle: 'italic',
               marginBottom: '6px',
             }}
           >
-            {eventDate} • {city}
+            {`${eventDate} • ${city}`}
           </div>
 
           <div
             style={{
+              display: 'flex',
               fontSize: '14px',
               color: 'rgba(212, 175, 55, 0.7)',
               letterSpacing: '3px',

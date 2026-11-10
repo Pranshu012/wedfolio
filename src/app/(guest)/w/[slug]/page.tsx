@@ -1,17 +1,13 @@
+import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPublishedWeddingBySlug } from '@/modules/publishing/services/public-wedding.service';
-import { resolveTemplate } from '@/modules/templates/loader';
 import { createClient } from '@/lib/supabase/server';
-import { ThemeSwitcherPill } from '@/components/shared/ThemeSwitcherPill';
+import { WeddingViewClient } from './WeddingViewClient';
 
 interface WeddingPageProps {
   params: Promise<{
     slug: string;
-  }>;
-  searchParams?: Promise<{
-    template?: string;
-    theme?: string;
   }>;
 }
 
@@ -46,9 +42,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function WeddingPage({ params, searchParams }: WeddingPageProps) {
+export default async function WeddingPage({ params }: WeddingPageProps) {
   const { slug } = await params;
-  const search = await searchParams;
   const wedding = await getPublishedWeddingBySlug(slug);
 
   if (!wedding) {
@@ -57,46 +52,34 @@ export default async function WeddingPage({ params, searchParams }: WeddingPageP
 
   // Check if current user is an authenticated workspace editor
   let isEditor = false;
-  try {
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
-      const { data: member } = await supabase
-        .from('workspace_members')
-        .select('role')
-        .eq('user_id', user.id)
-        .in('role', ['owner', 'editor'])
-        .maybeSingle();
+  if (!process.env.GITHUB_ACTIONS) {
+    try {
+      const supabase = await createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: member } = await supabase
+          .from('workspace_members')
+          .select('role')
+          .eq('user_id', user.id)
+          .in('role', ['owner', 'editor'])
+          .maybeSingle();
 
-      if (member) {
-        isEditor = true;
+        if (member) {
+          isEditor = true;
+        }
       }
+    } catch {
+      isEditor = false;
     }
-  } catch {
-    isEditor = false;
   }
 
-  // Allow query-based preview for template variations (e.g. ?template=palace-garden)
-  const requestedTemplate = search?.template || search?.theme;
-  const activeTemplateId = requestedTemplate === 'palace-garden'
-    ? 'palace-garden'
-    : requestedTemplate === 'royal-heritage'
-    ? 'royal-heritage'
-    : wedding.templateId;
-
-  // Strictly resolve template by ID and exact version (fails explicitly if missing)
-  const template = resolveTemplate(activeTemplateId, wedding.templateVersion);
-  const TemplateComponent = template.Component;
-  const activeTheme = activeTemplateId === 'palace-garden' ? template.defaultTheme : wedding.theme;
-
   return (
-    <>
-      <TemplateComponent
-        content={wedding.content}
-        theme={activeTheme}
+    <Suspense fallback={null}>
+      <WeddingViewClient
+        wedding={wedding}
+        slug={slug}
         isEditor={isEditor}
       />
-      <ThemeSwitcherPill currentTemplate={activeTemplateId} slug={slug} />
-    </>
+    </Suspense>
   );
 }

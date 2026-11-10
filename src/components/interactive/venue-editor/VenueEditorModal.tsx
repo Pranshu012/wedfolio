@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { Settings, X, Save, MapPin, Check, AlertCircle } from 'lucide-react';
 import type { PublicVenue } from '@/modules/publishing/domain/public-snapshot.schema';
-import { updateVenueAction } from '@/modules/weddings/actions/update-venue.action';
 
 interface VenueEditorModalProps {
   weddingSlug: string;
@@ -57,11 +56,24 @@ export function VenueEditorModal({
         )}`,
     };
 
-    const res = await updateVenueAction({
-      weddingSlug,
-      isVenueEnabled,
-      venue: payloadVenue,
-    });
+    let res: { success: boolean; error?: string };
+    try {
+      const response = await fetch('/api/venue/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          weddingSlug,
+          isVenueEnabled,
+          venue: payloadVenue,
+        }),
+      });
+      res = await response.json();
+    } catch {
+      res = {
+        success: false,
+        error: 'Venue editing is only available in live backend server mode.',
+      };
+    }
 
     setIsSaving(false);
     if (res.success) {
