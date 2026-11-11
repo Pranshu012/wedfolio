@@ -113,11 +113,12 @@ export function PalaceHeroSection({ content }: PalaceHeroSectionProps) {
           className="w-full flex justify-center mt-1 sm:mt-2"
         >
           <PalaceMandalaScratchReveal
-            dateLine1="31 JANUARY"
+            dateLine1="31 January"
             dateLine2="2027"
             supportingText="The day we begin forever."
             foilTagline="A LITTLE SURPRISE AWAITS"
-            foilInstruction="Scratch to reveal our wedding date"
+            foilInstructionLine1="Scratch to reveal"
+            foilInstructionLine2="our wedding date"
           />
         </motion.div>
       </div>

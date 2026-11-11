@@ -11,17 +11,19 @@ export interface PalaceMandalaScratchRevealProps {
   dateLine2?: string;
   supportingText?: string;
   foilTagline?: string;
-  foilInstruction?: string;
+  foilInstructionLine1?: string;
+  foilInstructionLine2?: string;
   onRevealed?: () => void;
   className?: string;
 }
 
 export function PalaceMandalaScratchReveal({
-  dateLine1 = '31 JANUARY',
+  dateLine1 = '31 January',
   dateLine2 = '2027',
   supportingText = 'The day we begin forever.',
   foilTagline = 'A LITTLE SURPRISE AWAITS',
-  foilInstruction = 'Scratch to reveal our wedding date',
+  foilInstructionLine1 = 'Scratch to reveal',
+  foilInstructionLine2 = 'our wedding date',
   onRevealed,
   className,
 }: PalaceMandalaScratchRevealProps) {
@@ -110,34 +112,8 @@ export function PalaceMandalaScratchReveal({
     ctx.stroke();
     ctx.setLineDash([]);
 
-    // Decorative floral ornament
-    ctx.fillStyle = '#8C6A29';
-    ctx.font = '16px serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('🌸', cx, cy - 28);
-
-    // Foil Tagline: "A LITTLE SURPRISE AWAITS"
-    ctx.fillStyle = '#8C6A29';
-    ctx.font = '700 9.5px "Cinzel", Georgia, serif';
-    ctx.letterSpacing = '2.5px';
-    ctx.fillText(foilTagline, cx, cy - 6);
-
-    // Foil Instruction: "Scratch to reveal our wedding date"
-    ctx.fillStyle = '#4A0E17';
-    ctx.font = 'italic 600 13px "Cormorant Garamond", Georgia, serif';
-    ctx.fillText(foilInstruction, cx, cy + 18);
-
-    // Subtle divider flourish
-    ctx.strokeStyle = 'rgba(197, 160, 89, 0.5)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(cx - 28, cy + 34);
-    ctx.lineTo(cx + 28, cy + 34);
-    ctx.stroke();
-
     ctx.restore();
-  }, [foilTagline, foilInstruction]);
+  }, []);
 
   useEffect(() => {
     initCanvas();
@@ -230,7 +206,7 @@ export function PalaceMandalaScratchReveal({
   return (
     <div
       className={cn(
-        'relative flex flex-col items-center justify-center my-4 sm:my-6 px-4 w-full max-w-[380px] sm:max-w-[420px] mx-auto select-none',
+        'relative flex flex-col items-center justify-center my-4 sm:my-6 px-4 w-full max-w-[295px] min-[390px]:max-w-[335px] sm:max-w-[380px] md:max-w-[420px] mx-auto select-none',
         className
       )}
     >
@@ -248,40 +224,42 @@ export function PalaceMandalaScratchReveal({
           className="absolute rounded-full overflow-hidden z-10"
         >
           {/* Layer 1A: Underlying Revealed Wedding Date (Z-0) */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6EE] via-[#FAF2E4] to-[#F5EBDD] flex flex-col items-center justify-center p-3 text-center z-0 select-none shadow-inner">
-            {/* Header: "OUR WEDDING DAY" */}
-            <div className="flex items-center gap-1 text-[#C5A059] mb-0.5 sm:mb-1">
-              <Sparkles className="w-2.5 h-2.5 text-[#C5A059]" />
-              <span className="text-[8px] sm:text-[10px] font-serif uppercase tracking-[0.25em] font-bold">
-                OUR WEDDING DAY
-              </span>
-              <Sparkles className="w-2.5 h-2.5 text-[#C5A059]" />
-            </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6EE] via-[#FAF2E4] to-[#F5EBDD] flex flex-col items-center justify-center p-2 text-center z-0 select-none shadow-inner">
+            <div className="w-full max-w-[78%] flex flex-col items-center justify-center">
+              {/* Header: "OUR WEDDING DAY" */}
+              <div className="flex items-center gap-1 text-[#C5A059] mb-0.5">
+                <Sparkles className="w-2.5 h-2.5 text-[#C5A059] flex-shrink-0" />
+                <span className="text-[clamp(8px,1.9vw,10.5px)] font-serif uppercase tracking-[0.22em] font-bold">
+                  OUR WEDDING DAY
+                </span>
+                <Sparkles className="w-2.5 h-2.5 text-[#C5A059] flex-shrink-0" />
+              </div>
 
-            {/* Two-Line Wedding Date in bold Deep Burgundy */}
-            <div className="flex flex-col items-center leading-tight my-0.5 sm:my-1">
-              <span className="text-lg sm:text-2xl md:text-3xl font-serif font-bold text-[#4A0E17] tracking-wider drop-shadow-xs">
-                {dateLine1}
-              </span>
-              <span className="text-lg sm:text-2xl md:text-3xl font-serif font-bold text-[#4A0E17] tracking-widest mt-0.5 drop-shadow-xs">
-                {dateLine2}
-              </span>
-            </div>
+              {/* Two-Line Wedding Date: "31 January" on line 1, "2027" on line 2 */}
+              <div className="flex flex-col items-center leading-none my-0.5 sm:my-1">
+                <span className="text-[clamp(17px,4.5vw,26px)] font-serif font-bold text-[#4A0E17] tracking-normal whitespace-nowrap drop-shadow-xs">
+                  {dateLine1}
+                </span>
+                <span className="text-[clamp(17px,4.5vw,26px)] font-serif font-bold text-[#4A0E17] tracking-widest mt-0.5 sm:mt-1 drop-shadow-xs">
+                  {dateLine2}
+                </span>
+              </div>
 
-            {/* Small antique-gold floral ornament divider */}
-            <div className="flex items-center gap-1.5 my-1 opacity-70">
-              <div className="w-5 h-px bg-[#C5A059]" />
-              <span className="text-[#C5A059] text-[8px]">✦</span>
-              <div className="w-5 h-px bg-[#C5A059]" />
-            </div>
+              {/* Small antique-gold floral ornament divider */}
+              <div className="flex items-center gap-1.5 my-0.5 sm:my-1 opacity-75">
+                <div className="w-5 sm:w-7 h-px bg-[#C5A059]" />
+                <span className="text-[#C5A059] text-[8px] sm:text-[9px]">✦</span>
+                <div className="w-5 sm:w-7 h-px bg-[#C5A059]" />
+              </div>
 
-            {/* Supporting Romantic Subtitle */}
-            <p className="text-[9.5px] sm:text-[11.5px] font-serif italic text-[#6B7C69] font-medium leading-tight max-w-[140px] sm:max-w-[170px]">
-              &ldquo;{supportingText}&rdquo;
-            </p>
+              {/* Supporting Romantic Subtitle */}
+              <p className="text-[clamp(9.5px,2.4vw,12px)] font-serif italic text-[#6B7C69] font-medium leading-tight max-w-[95%]">
+                &ldquo;{supportingText}&rdquo;
+              </p>
+            </div>
           </div>
 
-          {/* Layer 1B: Champagne Gold Scratch Canvas (Z-10) */}
+          {/* Layer 1B: Champagne Gold Scratch Canvas Foil (Z-10) */}
           <canvas
             ref={canvasRef}
             width={280}
@@ -295,6 +273,39 @@ export function PalaceMandalaScratchReveal({
             }`}
             aria-label="Interactive scratch card. Drag pointer across or tap button below to reveal."
           />
+
+          {/* Layer 1C: Unrevealed Instruction Overlay (Z-15, Positioned Above the Foil) */}
+          <div
+            className={cn(
+              'absolute inset-0 flex flex-col items-center justify-center p-2 text-center z-15 pointer-events-none transition-opacity duration-700 select-none',
+              isRevealed ? 'opacity-0' : 'opacity-100'
+            )}
+          >
+            <div className="w-full max-w-[78%] flex flex-col items-center justify-center">
+              {/* Flower ornament above heading */}
+              <span className="text-[clamp(13px,3.2vw,18px)] mb-0.5" aria-hidden="true">
+                🌸
+              </span>
+
+              {/* Foil Tagline: "A LITTLE SURPRISE AWAITS" */}
+              <span className="text-[clamp(8px,2vw,10.5px)] font-serif font-bold text-[#8C6A29] uppercase tracking-[0.2em] mb-1">
+                {foilTagline}
+              </span>
+
+              {/* Instruction in two balanced lines */}
+              <div className="text-[clamp(12px,3.1vw,16px)] font-serif italic font-semibold text-[#4A0E17] leading-tight my-0.5">
+                <span className="block whitespace-nowrap">{foilInstructionLine1}</span>
+                <span className="block whitespace-nowrap">{foilInstructionLine2}</span>
+              </div>
+
+              {/* Thin gold decorative divider with central ornamental icon */}
+              <div className="flex items-center gap-1.5 mt-1 sm:mt-1.5 opacity-80">
+                <div className="w-5 sm:w-7 h-px bg-[#C5A059]" />
+                <span className="text-[#C5A059] text-[8px] sm:text-[9px]">✦</span>
+                <div className="w-5 sm:w-7 h-px bg-[#C5A059]" />
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Layer 2: Permanent Intricate Ornamental Gold Mandala Frame (Z-20, Never Scratched) */}

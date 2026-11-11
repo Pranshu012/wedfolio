@@ -32,9 +32,10 @@ describe('Palace Garden Royal Mandala Scratch Reveal Invariants', () => {
 
   it('configures the required foil and revealed typography strings', () => {
     assert.ok(componentSource.includes("foilTagline = 'A LITTLE SURPRISE AWAITS'"));
-    assert.ok(componentSource.includes("foilInstruction = 'Scratch to reveal our wedding date'"));
+    assert.ok(componentSource.includes("foilInstructionLine1 = 'Scratch to reveal'"));
+    assert.ok(componentSource.includes("foilInstructionLine2 = 'our wedding date'"));
     assert.ok(componentSource.includes('OUR WEDDING DAY'));
-    assert.ok(componentSource.includes("dateLine1 = '31 JANUARY'"));
+    assert.ok(componentSource.includes("dateLine1 = '31 January'"));
     assert.ok(componentSource.includes("dateLine2 = '2027'"));
     assert.ok(componentSource.includes("supportingText = 'The day we begin forever.'"));
   });
