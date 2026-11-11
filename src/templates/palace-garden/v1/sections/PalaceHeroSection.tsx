@@ -4,10 +4,9 @@ import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { CornerBotanicals } from '../components/CornerBotanicals';
 import { PalaceHeroIllustration } from '../components/PalaceHeroIllustration';
-import { MuhuratCartouche } from '../components/MuhuratCartouche';
 import { PalaceOpeningEnvelope } from '../components/PalaceOpeningEnvelope';
 import { SectionDivider } from '../components/SectionDivider';
-import { ScratchDateReveal } from '@/components/interactive/scratch-reveal/ScratchDateReveal';
+import { PalaceJharokhaScratchReveal } from '../components/PalaceJharokhaScratchReveal';
 import type { PublicWeddingSnapshot } from '@/modules/publishing/domain/public-snapshot.schema';
 import { MOTION_EASINGS } from '@/lib/design-system/motion';
 import { assetUrl } from '@/lib/utils';
@@ -106,19 +105,18 @@ export function PalaceHeroSection({ content }: PalaceHeroSectionProps) {
           Save The Auspicious Date
         </motion.p>
 
-        {/* 4. Scalloped Muhurat Cartouche wrapping Scratch Date Reveal */}
+        {/* 4. Royal Rajasthani Jharokha Scratch-to-Reveal Wedding Date */}
         <motion.div
           initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.65, ease: MOTION_EASINGS.ceremonial }}
+          className="w-full flex justify-center mt-1 sm:mt-2"
         >
-          <MuhuratCartouche subtitle="WEDDING MUHURAT">
-            <ScratchDateReveal
-              revealText="Saturday, 12th December 2026"
-              subText="Auspicious Wedding Muhurat"
-              muhuratTime="Godhuli Bela • 06:00 PM onwards"
-            />
-          </MuhuratCartouche>
+          <PalaceJharokhaScratchReveal
+            dateText="31 January 2027"
+            supportingText="The day we begin forever."
+            foilHeading="Scratch to unveil our special day"
+          />
         </motion.div>
       </div>
     </header>
