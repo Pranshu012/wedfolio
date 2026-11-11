@@ -91,7 +91,7 @@ export function PalaceFamilySection({ family }: PalaceFamilySectionProps) {
                 ease: MOTION_EASINGS.ceremonial,
               }}
               whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.22 } }}
-              className="p-6 sm:p-7 rounded-2xl bg-gradient-to-b from-[#FAF6EE] to-[#F5ECE0] border border-[#C5A059]/40 shadow-[0_6px_20px_rgba(74,14,23,0.06)] hover:shadow-[0_12px_30px_rgba(74,14,23,0.1)] flex flex-col justify-between transition-shadow relative overflow-hidden"
+              className="p-6 sm:p-7 rounded-2xl bg-gradient-to-b from-[#FAF4E8] to-[#EFE5D5] border border-[#C5A059]/40 shadow-[0_6px_20px_rgba(74,14,23,0.06)] hover:shadow-[0_12px_30px_rgba(74,14,23,0.1)] flex flex-col justify-between transition-shadow relative overflow-hidden"
             >
               {/* Corner delicate botanical floral accents */}
               <div className="absolute top-0 right-0 w-7 h-7 pointer-events-none opacity-20 border-t-2 border-r-2 border-[#C5A059] rounded-tr-2xl" />

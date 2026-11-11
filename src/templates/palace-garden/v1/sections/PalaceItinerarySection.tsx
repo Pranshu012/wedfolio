@@ -140,7 +140,7 @@ export function PalaceItinerarySection({ schedule }: PalaceItinerarySectionProps
                       transition: { duration: 0.25, ease: 'easeOut' as const },
                     }
               }
-              className="relative p-5 sm:p-7 md:p-8 rounded-2xl bg-gradient-to-br from-[#FAF6EE] to-[#F5ECE0] border border-[#C5A059]/45 shadow-[0_8px_24px_rgba(74,14,23,0.06)] transition-all"
+              className="relative p-5 sm:p-7 md:p-8 rounded-2xl bg-gradient-to-br from-[#FAF4E8] to-[#EFE5D5] border border-[#C5A059]/40 shadow-[0_8px_24px_rgba(74,14,23,0.06)] transition-all"
             >
               {/* Corner delicate botanical floral accents */}
               <div className="absolute top-0 right-0 w-7 h-7 pointer-events-none opacity-20 border-t-2 border-r-2 border-[#C5A059] rounded-tr-2xl" />

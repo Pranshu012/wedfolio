@@ -21,18 +21,21 @@ export function PalaceHeroSection({ content }: PalaceHeroSectionProps) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <header className="relative min-h-[92vh] flex flex-col items-center justify-between text-center pt-8 sm:pt-14 overflow-hidden bg-gradient-to-b from-[#FAF6EE] via-[#FAF4E8] to-[#F5ECE0]">
-      {/* 1. Corner Watercolor Botanical Roses (Top Left & Top Right) */}
+    <header className="relative min-h-[96vh] sm:min-h-screen flex flex-col items-center justify-start text-center pt-8 sm:pt-14 pb-20 sm:pb-32 overflow-hidden bg-[#F5EBDD]">
+      {/* 1. Continuous Royal Watercolor Palace Garden Background Layer (Desktop & Mobile) */}
+      <PalaceHeroIllustration />
+
+      {/* 2. Corner Watercolor Botanical Roses (Top Left & Top Right) */}
       <CornerBotanicals />
 
-      {/* 2. Interactive Wax Seal Opening Envelope Modal */}
+      {/* 3. Interactive Wax Seal Opening Envelope Modal */}
       <PalaceOpeningEnvelope
         sealText={content.interactive?.envelopeSealText || 'S & P'}
         weddingTitle={content.weddingTitle}
         coupleNames={coupleNames}
       />
 
-      {/* 3. Central Content Area (Kept clean for supreme readability) */}
+      {/* 4. Central Content Area (Kept clean for supreme readability in the upper parchment zone) */}
       <div className="relative z-20 px-4 max-w-2xl mx-auto flex flex-col items-center mt-2 sm:mt-4">
         {/* Sacred Traditional Mantra */}
         <motion.div
@@ -118,9 +121,6 @@ export function PalaceHeroSection({ content }: PalaceHeroSectionProps) {
           </MuhuratCartouche>
         </motion.div>
       </div>
-
-      {/* 5. Bottom Anchored Palace, Peacocks, Garden Palms & Couple Illustration */}
-      <PalaceHeroIllustration />
     </header>
   );
 }

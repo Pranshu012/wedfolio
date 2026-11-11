@@ -9,7 +9,7 @@ interface PalaceFooterSectionProps {
 
 export function PalaceFooterSection({ coupleNames }: PalaceFooterSectionProps) {
   return (
-    <footer className="relative pt-16 pb-12 px-4 text-center bg-gradient-to-t from-[#FAF4E8] via-[#FAF6EE] to-transparent border-t-2 border-[#C5A059]/60">
+    <footer className="relative pt-16 pb-12 px-4 text-center bg-gradient-to-t from-[#FAF4E8] via-[#F5EBDD] to-transparent border-t border-[#C5A059]/35">
       <div className="max-w-md mx-auto flex flex-col items-center relative z-10">
         <span className="text-[#C5A059] text-xs font-serif uppercase tracking-[0.3em] font-semibold">
           || Subham Bhavatu ||

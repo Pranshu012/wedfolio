@@ -44,7 +44,7 @@ export function PalaceVenueSection({ venue, isEnabled = true }: PalaceVenueSecti
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.65, ease: MOTION_EASINGS.ceremonial }}
-        className="rounded-2xl bg-gradient-to-br from-[#FAF6EE] to-[#F5ECE0] border border-[#C5A059]/45 shadow-[0_12px_36px_rgba(74,14,23,0.08)] overflow-hidden grid grid-cols-1 lg:grid-cols-5 relative"
+        className="rounded-2xl bg-gradient-to-br from-[#FAF4E8] to-[#EFE5D5] border border-[#C5A059]/40 shadow-[0_12px_36px_rgba(74,14,23,0.08)] overflow-hidden grid grid-cols-1 lg:grid-cols-5 relative"
       >
         {/* Venue Information Column */}
         <div className="p-7 sm:p-10 lg:col-span-2 flex flex-col justify-between">

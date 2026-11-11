@@ -15,7 +15,7 @@ export function PalaceCountdownSection({
   timezone = 'Asia/Kolkata',
 }: PalaceCountdownSectionProps) {
   return (
-    <section className="relative py-8 px-4 bg-gradient-to-r from-[#FAF4E8] via-[#FAF6EE] to-[#FAF4E8] border-y-2 border-[#C5A059]/60 shadow-xs">
+    <section className="relative py-10 px-4 bg-gradient-to-r from-[#F5EBDD] via-[#FAF4E8] to-[#F5EBDD] border-y border-[#C5A059]/35">
       <div className="max-w-4xl mx-auto text-center">
         <WeddingCountdown
           eventDate={eventDate}

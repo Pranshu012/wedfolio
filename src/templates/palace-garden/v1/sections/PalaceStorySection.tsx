@@ -43,7 +43,7 @@ export function PalaceStorySection({ couple }: PalaceStorySectionProps) {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.65, ease: MOTION_EASINGS.ceremonial }}
           whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.22 } }}
-          className="flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-[#FAF6EE] to-[#F5ECE0] border border-[#C5A059]/45 shadow-[0_8px_24px_rgba(74,14,23,0.06)] hover:shadow-[0_16px_36px_rgba(74,14,23,0.12)] relative overflow-hidden transition-all"
+          className="flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-[#FAF4E8] to-[#EFE5D5] border border-[#C5A059]/40 shadow-[0_8px_24px_rgba(74,14,23,0.06)] hover:shadow-[0_16px_36px_rgba(74,14,23,0.12)] relative overflow-hidden transition-all"
         >
           {/* Subtle botanical corner lines */}
           <div className="absolute top-0 right-0 w-8 h-8 pointer-events-none opacity-20 border-t-2 border-r-2 border-[#C5A059] rounded-tr-2xl" />
@@ -79,7 +79,7 @@ export function PalaceStorySection({ couple }: PalaceStorySectionProps) {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.65, delay: 0.1, ease: MOTION_EASINGS.ceremonial }}
           whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.22 } }}
-          className="flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-[#FAF6EE] to-[#F5ECE0] border border-[#C5A059]/45 shadow-[0_8px_24px_rgba(74,14,23,0.06)] hover:shadow-[0_16px_36px_rgba(74,14,23,0.12)] relative overflow-hidden transition-all"
+          className="flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-[#FAF4E8] to-[#EFE5D5] border border-[#C5A059]/40 shadow-[0_8px_24px_rgba(74,14,23,0.06)] hover:shadow-[0_16px_36px_rgba(74,14,23,0.12)] relative overflow-hidden transition-all"
         >
           {/* Subtle botanical corner lines */}
           <div className="absolute top-0 right-0 w-8 h-8 pointer-events-none opacity-20 border-t-2 border-r-2 border-[#C5A059] rounded-tr-2xl" />
@@ -116,7 +116,7 @@ export function PalaceStorySection({ couple }: PalaceStorySectionProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.2, ease: MOTION_EASINGS.ceremonial }}
-          className="mt-12 sm:mt-16 text-center max-w-2xl mx-auto p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#FAF4E8] via-[#FAF6EE] to-[#FAF4E8] border border-[#C5A059]/40 shadow-[0_6px_20px_rgba(74,14,23,0.05)]"
+          className="mt-12 sm:mt-16 text-center max-w-2xl mx-auto p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#FAF4E8] via-[#FAF2E4] to-[#FAF4E8] border border-[#C5A059]/35 shadow-[0_6px_20px_rgba(74,14,23,0.05)]"
         >
           <div className="flex items-center justify-center gap-2 mb-3">
             <Heart className="w-4 h-4 text-[#D98894] fill-[#D98894]" />

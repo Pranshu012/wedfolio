@@ -47,9 +47,9 @@ export const THEME_TOKENS = {
       accent: '#C5A059',         // Warm Antique Gold
       rose: '#D98894',           // Dusty Watercolor Rose
       roseLight: '#EAB8C0',      // Soft Blush Rose
-      background: '#FAF6EE',     // Warm Parchment
-      surface: '#FAF4E8',        // Soft Ivory
-      surfaceTint: '#F5ECE0',    // Aged Parchment Tint
+      background: '#F5EBDD',     // Warm Antique Parchment
+      surface: '#FAF4E8',        // Soft Ivory Parchment Surface
+      surfaceTint: '#EFE5D5',    // Aged Parchment Tint
       text: '#4A0E17',           // Deep Wine Typography
       textMuted: '#5C5446',      // Warm Earth Muted
     },
