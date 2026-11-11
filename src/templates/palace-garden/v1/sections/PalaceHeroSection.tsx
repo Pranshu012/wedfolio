@@ -6,7 +6,7 @@ import { CornerBotanicals } from '../components/CornerBotanicals';
 import { PalaceHeroIllustration } from '../components/PalaceHeroIllustration';
 import { PalaceOpeningEnvelope } from '../components/PalaceOpeningEnvelope';
 import { SectionDivider } from '../components/SectionDivider';
-import { PalaceJharokhaScratchReveal } from '../components/PalaceJharokhaScratchReveal';
+import { PalaceMandalaScratchReveal } from '../components/PalaceMandalaScratchReveal';
 import type { PublicWeddingSnapshot } from '@/modules/publishing/domain/public-snapshot.schema';
 import { MOTION_EASINGS } from '@/lib/design-system/motion';
 import { assetUrl } from '@/lib/utils';
@@ -105,17 +105,19 @@ export function PalaceHeroSection({ content }: PalaceHeroSectionProps) {
           Save The Auspicious Date
         </motion.p>
 
-        {/* 4. Royal Rajasthani Jharokha Scratch-to-Reveal Wedding Date */}
+        {/* 4. Royal Ornamental Gold Mandala Scratch-to-Reveal Wedding Date */}
         <motion.div
           initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.65, ease: MOTION_EASINGS.ceremonial }}
           className="w-full flex justify-center mt-1 sm:mt-2"
         >
-          <PalaceJharokhaScratchReveal
-            dateText="31 January 2027"
+          <PalaceMandalaScratchReveal
+            dateLine1="31 JANUARY"
+            dateLine2="2027"
             supportingText="The day we begin forever."
-            foilHeading="Scratch to unveil our special day"
+            foilTagline="A LITTLE SURPRISE AWAITS"
+            foilInstruction="Scratch to reveal our wedding date"
           />
         </motion.div>
       </div>
