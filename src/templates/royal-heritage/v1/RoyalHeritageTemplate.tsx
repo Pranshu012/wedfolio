@@ -83,6 +83,7 @@ export function RoyalHeritageTemplate({ content, theme, isEditor = false }: Wedd
       <RoyalAudioPlayer
         audioUrl={content.interactive?.backgroundMusicUrl}
         trackTitle={content.interactive?.musicTitle}
+        variant="royal"
       />
 
       {/* 10. Editable Venue Information Modal for Authenticated Wedding Editors ONLY */}

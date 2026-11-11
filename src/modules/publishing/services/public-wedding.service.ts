@@ -151,7 +151,7 @@ export const SHREYA_PRANSHU_FALLBACK: PublicWeddingData = {
     interactive: {
       envelopeSealText: 'S & P',
       scratchDateText: 'Save The Date: 12th December 2026',
-      backgroundMusicUrl: '/audio/royal-sitar-harmony.mp3',
+      backgroundMusicUrl: undefined,
       musicTitle: 'Royal Shehnai & Sitar Harmony',
     },
   },

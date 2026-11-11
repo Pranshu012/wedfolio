@@ -73,6 +73,7 @@ export function PalaceGardenTemplate({ content, theme, isEditor = false }: Weddi
       <RoyalAudioPlayer
         audioUrl={content.interactive?.backgroundMusicUrl}
         trackTitle={content.interactive?.musicTitle}
+        variant="palace"
       />
 
       {/* 10. Editable Venue Information Modal for Authenticated Workspace Editors ONLY */}
