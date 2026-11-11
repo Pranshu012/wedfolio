@@ -210,105 +210,113 @@ export function PalaceMandalaScratchReveal({
         className
       )}
     >
-      {/* Outer Medallion Container (Maintains perfect aspect-square symmetry) */}
-      <div className="relative w-full aspect-square filter drop-shadow-[0_12px_32px_rgba(140,106,41,0.22)]">
-        
-        {/* Layer 1: Central Scratch & Reveal Disc (Positioned at 19.6% inset = 60.8% diameter) */}
+      {/* Outer Medallion Container (Maintains strict aspect-square symmetry and shared CSS geometry variables) */}
+      <div
+        style={
+          {
+            '--mandala-inner-size': '60.8%',
+            '--mandala-inner-inset': '19.6%',
+          } as React.CSSProperties
+        }
+        className="relative w-full aspect-square filter drop-shadow-[0_12px_32px_rgba(140,106,41,0.22)]"
+      >
+        {/* Unified Shared Inner Circular Stage (Revealed, Canvas, and Unrevealed Share Exact Center & Geometry) */}
         <div
           style={{
-            top: '19.6%',
-            left: '19.6%',
-            width: '60.8%',
-            height: '60.8%',
+            top: 'var(--mandala-inner-inset, 19.6%)',
+            left: 'var(--mandala-inner-inset, 19.6%)',
+            width: 'var(--mandala-inner-size, 60.8%)',
+            height: 'var(--mandala-inner-size, 60.8%)',
           }}
           className="absolute rounded-full overflow-hidden z-10"
         >
-          {/* Layer 1A: Underlying Revealed Wedding Date (Z-0) */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6EE] via-[#FAF2E4] to-[#F5EBDD] flex flex-col items-center justify-center p-2 text-center z-0 select-none shadow-inner">
-            <div className="w-full max-w-[78%] flex flex-col items-center justify-center">
+          {/* Layer 1: Underlying Revealed Wedding Date (Z-0) */}
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-[#FAF6EE] via-[#FAF2E4] to-[#F5EBDD] flex flex-col items-center justify-center text-center z-0 select-none shadow-inner p-1">
+            <div className="w-full max-w-[74%] flex flex-col items-center justify-center text-center">
               {/* Header: "OUR WEDDING DAY" */}
-              <div className="flex items-center gap-1 text-[#C5A059] mb-0.5">
+              <div className="flex items-center justify-center gap-1 text-[#C5A059] mb-1">
                 <Sparkles className="w-2.5 h-2.5 text-[#C5A059] flex-shrink-0" />
-                <span className="text-[clamp(8px,1.9vw,10.5px)] font-serif uppercase tracking-[0.22em] font-bold">
+                <span className="text-[clamp(8px,1.8vw,9.5px)] font-serif uppercase tracking-[0.16em] font-medium">
                   OUR WEDDING DAY
                 </span>
                 <Sparkles className="w-2.5 h-2.5 text-[#C5A059] flex-shrink-0" />
               </div>
 
               {/* Two-Line Wedding Date: "31 January" on line 1, "2027" on line 2 */}
-              <div className="flex flex-col items-center leading-none my-0.5 sm:my-1">
-                <span className="text-[clamp(17px,4.5vw,26px)] font-serif font-bold text-[#4A0E17] tracking-normal whitespace-nowrap drop-shadow-xs">
+              <div className="flex flex-col items-center justify-center leading-none my-0.5 sm:my-1">
+                <span className="text-[clamp(16px,4vw,23px)] font-serif font-medium text-[#4A0E17] tracking-normal whitespace-nowrap">
                   {dateLine1}
                 </span>
-                <span className="text-[clamp(17px,4.5vw,26px)] font-serif font-bold text-[#4A0E17] tracking-widest mt-0.5 sm:mt-1 drop-shadow-xs">
+                <span className="text-[clamp(16px,4vw,23px)] font-serif font-medium text-[#4A0E17] tracking-widest mt-0.5 sm:mt-1">
                   {dateLine2}
                 </span>
               </div>
 
               {/* Small antique-gold floral ornament divider */}
-              <div className="flex items-center gap-1.5 my-0.5 sm:my-1 opacity-75">
-                <div className="w-5 sm:w-7 h-px bg-[#C5A059]" />
-                <span className="text-[#C5A059] text-[8px] sm:text-[9px]">✦</span>
-                <div className="w-5 sm:w-7 h-px bg-[#C5A059]" />
+              <div className="flex items-center justify-center gap-1.5 my-1 opacity-75">
+                <div className="w-6 sm:w-8 h-px bg-[#C5A059]" />
+                <span className="text-[#C5A059] text-[8px]">✦</span>
+                <div className="w-6 sm:w-8 h-px bg-[#C5A059]" />
               </div>
 
-              {/* Supporting Romantic Subtitle */}
-              <p className="text-[clamp(9.5px,2.4vw,12px)] font-serif italic text-[#6B7C69] font-medium leading-tight max-w-[95%]">
+              {/* Supporting Romantic Sentence in Muted Sage */}
+              <p className="text-[clamp(9px,2.2vw,11.5px)] font-serif italic text-[#6B7C69] font-normal leading-tight max-w-[92%] mt-0.5">
                 &ldquo;{supportingText}&rdquo;
               </p>
             </div>
           </div>
 
-          {/* Layer 1B: Champagne Gold Scratch Canvas Foil (Z-10) */}
+          {/* Layer 2: Scratchable Gold Foil Canvas (Z-10) */}
           <canvas
             ref={canvasRef}
-            width={280}
-            height={280}
+            width={320}
+            height={320}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerUp}
-            className={`absolute inset-0 w-full h-full cursor-crosshair touch-none z-10 transition-opacity duration-700 ${
+            className={cn(
+              'absolute inset-0 w-full h-full cursor-crosshair touch-none z-10 transition-opacity duration-700 rounded-full',
               isRevealed ? 'opacity-0 pointer-events-none' : 'opacity-100'
-            }`}
+            )}
             aria-label="Interactive scratch card. Drag pointer across or tap button below to reveal."
           />
 
-          {/* Layer 1C: Unrevealed Instruction Overlay (Z-15, Positioned Above the Foil) */}
+          {/* Layer 3: Unrevealed Instruction Overlay (Z-15, Above the Foil) */}
           <div
             className={cn(
-              'absolute inset-0 flex flex-col items-center justify-center p-2 text-center z-15 pointer-events-none transition-opacity duration-700 select-none',
+              'absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center z-15 pointer-events-none transition-opacity duration-700 select-none p-1',
               isRevealed ? 'opacity-0' : 'opacity-100'
             )}
           >
-            <div className="w-full max-w-[78%] flex flex-col items-center justify-center">
-              {/* Flower ornament above heading */}
-              <span className="text-[clamp(13px,3.2vw,18px)] mb-0.5" aria-hidden="true">
+            <div className="w-full max-w-[74%] flex flex-col items-center justify-center text-center">
+              {/* Decorative Flower Above */}
+              <span className="text-[clamp(11px,2.6vw,15px)] mb-0.5" aria-hidden="true">
                 🌸
               </span>
 
-              {/* Foil Tagline: "A LITTLE SURPRISE AWAITS" */}
-              <span className="text-[clamp(8px,2vw,10.5px)] font-serif font-bold text-[#8C6A29] uppercase tracking-[0.2em] mb-1">
+              {/* Tagline: A LITTLE SURPRISE AWAITS (refined, reduced letter spacing) */}
+              <span className="text-[clamp(7.5px,1.8vw,9.5px)] font-serif font-medium text-[#8C6A29] uppercase tracking-[0.14em] mb-1">
                 {foilTagline}
               </span>
 
-              {/* Instruction in two balanced lines */}
-              <div className="text-[clamp(12px,3.1vw,16px)] font-serif italic font-semibold text-[#4A0E17] leading-tight my-0.5">
+              {/* Instruction in two balanced lines (un-bolded, elegant serif) */}
+              <div className="text-[clamp(11px,2.7vw,14px)] font-serif italic font-normal text-[#4A0E17] leading-tight my-0.5">
                 <span className="block whitespace-nowrap">{foilInstructionLine1}</span>
                 <span className="block whitespace-nowrap">{foilInstructionLine2}</span>
               </div>
 
-              {/* Thin gold decorative divider with central ornamental icon */}
-              <div className="flex items-center gap-1.5 mt-1 sm:mt-1.5 opacity-80">
-                <div className="w-5 sm:w-7 h-px bg-[#C5A059]" />
-                <span className="text-[#C5A059] text-[8px] sm:text-[9px]">✦</span>
-                <div className="w-5 sm:w-7 h-px bg-[#C5A059]" />
+              {/* Thin Gold Divider with Center Ornament Below Instruction */}
+              <div className="flex items-center justify-center gap-1.5 mt-1 sm:mt-1.5 opacity-85">
+                <div className="w-6 sm:w-8 h-px bg-[#C5A059]" />
+                <span className="text-[#C5A059] text-[8px]">✦</span>
+                <div className="w-6 sm:w-8 h-px bg-[#C5A059]" />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Layer 2: Permanent Intricate Ornamental Gold Mandala Frame (Z-20, Never Scratched) */}
+        {/* Layer 4: Permanent Intricate Ornamental Gold Mandala Frame (Z-20, Never Scratched) */}
         <img
           src={assetUrl('/themes/palace-garden/royal-mandala-frame.png')}
           alt="Royal Ornamental Gold Mandala Frame"

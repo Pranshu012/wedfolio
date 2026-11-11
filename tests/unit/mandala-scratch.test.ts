@@ -19,10 +19,24 @@ describe('Palace Garden Royal Mandala Scratch Reveal Invariants', () => {
   });
 
   it('enforces exact geometric proportions (60.8% inner diameter, 19.6% inset)', () => {
-    assert.ok(componentSource.includes("width: '60.8%'"));
-    assert.ok(componentSource.includes("height: '60.8%'"));
-    assert.ok(componentSource.includes("top: '19.6%'"));
-    assert.ok(componentSource.includes("left: '19.6%'"));
+    assert.ok(
+      componentSource.includes("width: '60.8%'") ||
+      componentSource.includes("'--mandala-inner-size': '60.8%'") ||
+      componentSource.includes("var(--mandala-inner-size, 60.8%)")
+    );
+    assert.ok(
+      componentSource.includes("height: '60.8%'") ||
+      componentSource.includes("var(--mandala-inner-size, 60.8%)")
+    );
+    assert.ok(
+      componentSource.includes("top: '19.6%'") ||
+      componentSource.includes("'--mandala-inner-inset': '19.6%'") ||
+      componentSource.includes("var(--mandala-inner-inset, 19.6%)")
+    );
+    assert.ok(
+      componentSource.includes("left: '19.6%'") ||
+      componentSource.includes("var(--mandala-inner-inset, 19.6%)")
+    );
   });
 
   it('guarantees the gold mandala frame sits at z-20 with pointer-events-none to protect from scratching', () => {
