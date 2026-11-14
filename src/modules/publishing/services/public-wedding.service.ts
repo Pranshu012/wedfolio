@@ -18,13 +18,13 @@ export interface PublicWeddingData {
 // Fallback seed data for local preview and development
 export const SHREYA_PRANSHU_FALLBACK: PublicWeddingData = {
   slug: 'shreya-pranshu',
-  templateId: 'royal-heritage',
+  templateId: 'palace-garden',
   templateVersion: '1.0.0',
   theme: {
-    primaryColor: '#5B0E2D',
-    secondaryColor: '#0B3C2D',
-    accentColor: '#D4AF37',
-    backgroundColor: '#FDFBF7',
+    primaryColor: '#4A0E17',
+    secondaryColor: '#6B7C69',
+    accentColor: '#C5A059',
+    backgroundColor: '#F5EBDD',
     fontHeading: 'Cinzel, Georgia, serif',
     fontBody: 'Cormorant Garamond, serif',
     fontScript: 'Great Vibes, cursive',

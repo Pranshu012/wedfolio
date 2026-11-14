@@ -1,5 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import {
   PublicWeddingSnapshotSchema,
   PublicVenueSchema,
@@ -72,5 +73,17 @@ describe('Template Versioning Invariants', () => {
     assert.equal(palaceGardenDefaultTheme.primaryColor, '#4A0E17');
     assert.equal(palaceGardenDefaultTheme.backgroundColor, '#FAF6EE');
     assert.equal(palaceGardenDefaultTheme.secondaryColor, '#6B7C69');
+  });
+
+  it('enforces Palace Garden as the default and exclusive template for Shreya & Pranshu', () => {
+    assert.equal(SHREYA_PRANSHU_FALLBACK.templateId, 'palace-garden');
+    assert.equal(SHREYA_PRANSHU_FALLBACK.theme.primaryColor, '#4A0E17');
+    assert.equal(SHREYA_PRANSHU_FALLBACK.theme.backgroundColor, '#F5EBDD');
+
+    // Verify WeddingViewClient does not include ThemeSwitcherPill in guest view
+    const viewClientPath = new URL('../../src/app/(guest)/w/[slug]/WeddingViewClient.tsx', import.meta.url).pathname;
+    const viewClientSource = readFileSync(viewClientPath, 'utf8');
+    assert.ok(!viewClientSource.includes('<ThemeSwitcherPill'), 'ThemeSwitcherPill must not be rendered in guest view');
+    assert.ok(viewClientSource.includes("activeTemplateId = 'palace-garden'"), 'Palace Garden must be active template');
   });
 });

@@ -37,7 +37,7 @@ export default function HomePage() {
             Shreya &amp; Pranshu
           </h2>
           <p className="text-xs font-serif italic text-[#F3D794] mt-1">
-            Royal Heritage Theme • Jaipur, Rajasthan
+            Palace Garden Theme • Jaipur, Rajasthan
           </p>
 
           <Link
